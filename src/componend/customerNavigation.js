@@ -47,12 +47,12 @@ const customerNavigation = () => {
                   Feedback
                 </a>
                 <div class="dropdown-menu">
-                  <a href="#" class="dropdown-item">
-                    Link 1
-                  </a>
-                  <a href="#" class="dropdown-item">
-                    Link 2
-                  </a>
+                  <Link to="/createFeedback" class="dropdown-item">
+                    Add Feedback
+                  </Link>
+                  <Link to="/viewFeedback" class="dropdown-item">
+                    View Feedback
+                  </Link>
                 </div>
               </li>
             )}
