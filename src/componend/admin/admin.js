@@ -14,6 +14,10 @@ import ListCustomerpro from '../IT19031026/list/listcustomer';
 import Adminpro from '../IT19031026/admin/admin';
 
 
+import CreateProducts from "../IT19018256/create-product.component";
+import ProductList from '../IT19018256/product-list-component';
+import EditProduct from '../IT19018256/edit.product.component';
+
 const admin = () => {
   return (
     <React.Fragment>
@@ -46,12 +50,8 @@ const admin = () => {
 
                     <div id="collapse1" class="collapse">
                       <div class="card-body">
-                        <a href="#" class="dropdown-item">
-                          Link 1
-                        </a>
-                        <a href="#" class="dropdown-item">
-                          Link 2
-                        </a>
+                        <a href="/admin/createProduct" class="dropdown-item">Add Product</a>
+                        <a href="/admin/allProduct" class="dropdown-item">All Product</a>
                         <a href="#" class="dropdown-item">
                           Link 3
                         </a>
@@ -159,7 +159,7 @@ const admin = () => {
 
                     <div id="collapse5" class="collapse">
                       <div class="card-body">
-                      <a href="/admin/admin-create-promotion" class="dropdown-item">
+                        <a href="/admin/admin-create-promotion" class="dropdown-item">
                           Add
                         </a>
                         <a href="/admin/admin-list-promotion" class="dropdown-item">
@@ -226,6 +226,13 @@ const admin = () => {
                 <Route path="/admin/admin-reject-promotion" exact>
                   <Adminpro />
                 </Route>
+
+                <Route path="/admin/createProduct" exact>
+                <CreateProducts/>
+                </Route>
+                <Route path="/admin/allProduct" exact component={ProductList} />
+                <Route path="/admin/edit/:id" component={EditProduct} />
+
 
               </div>
             </div>
