@@ -7,6 +7,8 @@ import CustomerLogin from "./IT19029900/customerLogin";
 import CustomerRegister from "./IT19029900/customerRegister";
 import CustomerPayment from "./IT19029900/customerPayment";
 import CutomerPaymentHistory from "./IT19029900/cutomerPaymentHistory";
+import CreateFeedback from "./IT17016476/createFeedback";
+import FeedbacksList from "./IT17016476/viewFeedback";
 
 const customerRoute = () => {
   return (
@@ -37,6 +39,14 @@ const customerRoute = () => {
 
       <Route path="/paymentHistory" exact>
         <CutomerPaymentHistory />
+      </Route>
+
+      <Route path="/createFeedback" exact>
+        <CreateFeedback />
+      </Route>
+
+      <Route path="/viewFeedback" exact>
+        <FeedbacksList />
       </Route>
     </React.Fragment>
   );

@@ -4,6 +4,7 @@ const bodyparser = require("body-parser");
 const mongoose = require("mongoose");
 const customerRoutes = require("./routes/customer/customer-route");
 const paymentRoutes = require("./routes/payment/payment-route");
+const feedbackRouter = require("./routes/feedback/feedback-route");
 
 require("dotenv").config();
 
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use("/feedback", feedbackRouter);
 app.use("/api/customers", customerRoutes);
 app.use("/api/payments", paymentRoutes);
 
