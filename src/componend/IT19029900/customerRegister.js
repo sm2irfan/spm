@@ -5,7 +5,6 @@ import CustomerNavigation from "../customerNavigation";
 import CustomerFooter from "../customerFooter";
 import detalis from "../../details.jpg";
 import axios from "axios";
-import aveter from "../../avatar.png";
 
 const CustomerRegister = () => {
   const First_name = useRef("");
@@ -38,6 +37,7 @@ const CustomerRegister = () => {
         if (res.status === 200) {
           localStorage.setItem("CustomerIsLoggedIn", true);
           localStorage.setItem("CustomerID", res.data._id);
+          localStorage.setItem("CustomerEmail", res.data.email);
           history.push(`/customerProfile`);
           window.location.reload();
         } else {

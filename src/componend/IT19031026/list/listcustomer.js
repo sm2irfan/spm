@@ -4,8 +4,6 @@ import axios from 'axios';
 const initialstate={
     products: []
 }
-
-
 class ListPromotion extends Component{
     constructor(props){
         super(props);
@@ -24,23 +22,21 @@ class ListPromotion extends Component{
         axios.delete("http://localhost:5000/promotion/deletepromotion/" + promotionId)
         .then((response) => {
           console.log(response.data.data);
-          window.location = "/admin/admin-list-promotion"
+          window.location = "/list-promotion"
         })
       }
 
 
       navigateupdate(e, promotionId) {
-          window.location = "/admin/admin-update-promotion/"+promotionId;
+          window.location = "/update-promotion/"+promotionId;
       }
 
-      
 
     render(){
         return(
             <div className="container">
             <br/>
         <h1><pre class="tab">Promotional Products Management                        <a href="create-promotion"><button class="btn btn-success btn-lg float-right" type="submit">New Product</button></a></pre>
-              
 </h1>
         
         <br/>

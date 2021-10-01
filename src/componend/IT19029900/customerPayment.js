@@ -6,34 +6,12 @@ import CustomerFooter from "../customerFooter";
 import detalis from "../../details.jpg";
 import aveter from "../../avatar.png";
 
-const Profile = () => {
+const CustomerPayment = () => {
   const [profile, setprofile] = useState({});
+  const [address, setaddress] = useState("");
+  const [city, setcity] = useState("");
 
   const history = useHistory();
-
-  function logout() {
-    localStorage.removeItem("CustomerIsLoggedIn");
-    localStorage.removeItem("CustomerID");
-    localStorage.removeItem("CustomerEmail");
-
-    history.push("/");
-    window.location.reload();
-  }
-
-  function EditProflie() {
-    history.push("/updateProfile");
-  }
-
-  function PDFfunction() {
-    const PDF = async () => {
-      const { data } = await axios.get(
-        `http://localhost:5000/api/customers/pdf/${localStorage.getItem(
-          "CustomerID"
-        )}`
-      );
-    };
-    PDF();
-  }
 
   useEffect(() => {
     const sendRequest = async () => {
@@ -48,6 +26,31 @@ const Profile = () => {
     sendRequest();
   }, []);
 
+  function submitHandler(event) {
+    event.preventDefault();
+    add();
+  }
+
+  async function add() {
+    axios
+      .post("http://localhost:5000/api/payments/post", {
+        firstname: profile.firstname,
+        lastname: profile.lastname,
+        address: address || profile.address,
+        city: city || profile.city,
+        phone: profile.phone,
+        email: profile.email,
+        totalPrice: 500,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          alert("ok");
+        } else {
+          alert("Payment failed please try again");
+        }
+      });
+  }
+
   return (
     <React.Fragment>
       <CustomerNavigation />
@@ -55,43 +58,21 @@ const Profile = () => {
       <div class="card text-white">
         <img width="500" height="150" class="card-img" src={detalis} alt="" />
         <div class="card-img-overlay">
-          <h1 class="card-title text-center">PROFILE</h1>
+          <h1 class="card-title text-center">PAYMENT</h1>
         </div>
       </div>
 
       <div className="my-5">
-        <section id="actions" class="py-4 mb-4 bg-light">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-3">
-                <button onClick={EditProflie} class="btn btn-success btn-block">
-                  Edit Profile
-                </button>
-              </div>
-              <div class="col-md-3">
-                <button onClick={PDFfunction} class="btn btn-success btn-block">
-                  PDF genarate
-                </button>
-              </div>
-              <div class="col-md-3">
-                <Link to="/paymentHistory" class="btn btn-success btn-block">
-                  Payment History
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section id="profile">
           <div class="container">
             <div class="row">
-              <div class="col-md-9">
+              <div class="col-md-8">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Profile</h4>
+                    <h4>Payment Gateway</h4>
                   </div>
                   <div class="card-body">
-                    <form>
+                    <form onSubmit={submitHandler}>
                       <div class="form-row">
                         <div class="col">
                           <label for="email">First name</label>
@@ -111,6 +92,7 @@ const Profile = () => {
                             placeholder="Last name"
                             value={profile.lastname}
                             readOnly
+                            required
                           />
                         </div>
                       </div>
@@ -121,7 +103,10 @@ const Profile = () => {
                           class="form-control"
                           placeholder="Address"
                           value={profile.address}
-                          readOnly
+                          onChange={(e) => {
+                            profile.address = setaddress(e.target.value);
+                          }}
+                          required
                         />
                       </div>
 
@@ -132,40 +117,74 @@ const Profile = () => {
                           class="form-control"
                           placeholder="City"
                           value={profile.city}
-                          readOnly
+                          onChange={(e) => {
+                            profile.city = setcity(e.target.value);
+                          }}
+                          required
                         />
                       </div>
 
                       <div class="form-group">
-                        <label for="phone">Phone</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          value={profile.phone}
-                          readOnly
-                        />
+                        <label for="Credit">Credit Card No</label>
+                        <input type="number" class="form-control" required />
                       </div>
-
                       <div class="form-group">
-                        <label for="email">Email</label>
-                        <input
-                          type="email"
-                          class="form-control"
-                          value={profile.email}
-                          readOnly
-                        />
+                        <label for="CVS">CVS Number</label>
+                        <input type="number" class="form-control" required />
                       </div>
+                      <button class="btn btn-primary btn-block" type="submit">
+                        Pay
+                      </button>
                     </form>
                   </div>
                 </div>
               </div>
-              <div class="col-md-3">
-                <h3>HI {profile.lastname}</h3>
-                <img src={aveter} alt="" class="d-block img-fluid mb-3" />
-
-                <button class="btn btn-danger btn-block" onClick={logout}>
-                  Log out
-                </button>
+              <div class="col-md-4">
+                <h3>Your Cart Items</h3>
+                <table class="table table-striped">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>#</th>
+                      <th>Item</th>
+                      <th>quantity</th>
+                      <th>Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>Apple</td>
+                      <td>2</td>
+                      <td>100 $</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>Apple</td>
+                      <td>2</td>
+                      <td>100 $</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>Apple</td>
+                      <td>2</td>
+                      <td>100 $</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>Apple</td>
+                      <td>2</td>
+                      <td>100 $</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>Apple</td>
+                      <td>2</td>
+                      <td>100 $</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h3>Total amount : 500$</h3>
+                <br></br>
               </div>
             </div>
           </div>
@@ -177,4 +196,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default CustomerPayment;

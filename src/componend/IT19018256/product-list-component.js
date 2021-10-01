@@ -35,11 +35,11 @@ export default class ProductList extends Component {
   }
 
   deleteProduct(id) {
-    axios.delete('http://localhost:5000/product/'+id)
-      .then(response => { console.log(response.data)});
+    axios.delete('http://localhost:5000/product/' + id)
+      .then(response => { console.log(response.data) });
 
     this.setState({
-       products: this.state.products.filter(el => el._id !== id)
+      products: this.state.products.filter(el => el._id !== id)
     })
   }
 
@@ -49,9 +49,18 @@ export default class ProductList extends Component {
     })
   }
 
+  PDFfucntion(){
+    const pdf = async() =>{
+      const {data} = await axios.get(
+        `http://localhost:5000/product/generatePDF`
+      )
+    };
+    pdf();
+  }
+
   render() {
     return (
-      
+
       <div class="row">
         <div class="col-lg-12">
           <br></br>
@@ -85,6 +94,12 @@ export default class ProductList extends Component {
                 {this.productsList()}
               </tbody>
             </table>
+
+            <div className="col-md-3">
+              <button onClick={this.PDFfucntion()} className="btn btn-success btn-block">
+                pdfGene
+              </button>
+            </div>
 
           </div>
         </div>

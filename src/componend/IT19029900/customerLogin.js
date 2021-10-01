@@ -28,6 +28,7 @@ const CustomerLogin = () => {
           setlogin(res);
           localStorage.setItem("CustomerIsLoggedIn", true);
           localStorage.setItem("CustomerID", res.data._id);
+          localStorage.setItem("CustomerEmail", res.data.email);
 
           history.push(`/customerProfile`);
           window.location.reload();

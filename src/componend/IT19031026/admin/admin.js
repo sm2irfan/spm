@@ -2,11 +2,14 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 const initialstate={
+    name: '',
+    detail: '',
+    discount: 0,
+    from: '',
+    to: '',
     products: []
 }
-
-
-class ListPromotion extends Component{
+class Admin extends Component{
     constructor(props){
         super(props);
         this.state = initialstate;
@@ -20,27 +23,41 @@ class ListPromotion extends Component{
         })
     }
 
-    navigatedelete(e, promotionId) {
-        axios.delete("http://localhost:5000/promotion/deletepromotion/" + promotionId)
-        .then((response) => {
-          console.log(response.data.data);
-          window.location = "/admin/admin-list-promotion"
-        })
+
+    navigatereject(e, promotionId) {
+
+        const promotion = {
+            decision: "Reject"
+        }
+    
+        console.log(promotion);
+    
+        axios.post('http://localhost:5000/promotion/updatepromotion/' + promotionId, promotion)
+          .then(res => console.log(res.data));
+    
+          window.location = "/admin/admin-reject-promotion";
       }
 
+      navigateapprove(e, promotionId) {
 
-      navigateupdate(e, promotionId) {
-          window.location = "/admin/admin-update-promotion/"+promotionId;
+        const promotion = {
+            decision: "Approve"
+        }
+    
+        console.log(promotion);
+    
+        axios.post('http://localhost:5000/promotion/updatepromotion/' + promotionId, promotion)
+          .then(res => console.log(res.data));
+    
+          window.location = "/admin/admin-reject-promotion";
       }
 
-      
 
     render(){
         return(
             <div className="container">
             <br/>
         <h1><pre class="tab">Promotional Products Management                        <a href="create-promotion"><button class="btn btn-success btn-lg float-right" type="submit">New Product</button></a></pre>
-              
 </h1>
         
         <br/>
@@ -53,6 +70,7 @@ class ListPromotion extends Component{
               <th>Discount (Rs)</th>
               <th>From</th>
               <th>To</th>
+              <th>Decesion</th>
               <th>Actions</th>
             </tr>
             <br/>
@@ -66,14 +84,15 @@ class ListPromotion extends Component{
                         <td>{item.discount}</td>
                         <td>{item.to}</td>
                         <td>{item.from}</td>
+                        <td>{item.decision}</td>
                         <td>
                             
-                            <button className="btn btn-primary" onClick={e => this.navigateupdate(e, item._id)}>
-                                Update
+                            <button className="btn btn-primary" onClick={e => this.navigateapprove(e, item._id)}>
+                                Approve
                             </button>
                             &nbsp;&nbsp;
-                            <button className="btn btn-primary" onClick={e => this.navigatedelete(e, item._id)}>
-                                Delete
+                            <button className="btn btn-primary" onClick={e => this.navigatereject(e, item._id)}>
+                                Reject
                             </button>
                         </td>
                     </tr>
@@ -85,4 +104,4 @@ class ListPromotion extends Component{
     };
 };
 
-export default ListPromotion;
+export default Admin;

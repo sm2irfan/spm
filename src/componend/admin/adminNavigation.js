@@ -1,18 +1,18 @@
 import React from "react";
-import logo from "../logo.JPG";
+import logo from "../../logo.JPG";
 import { Link } from "react-router-dom";
 
-const customerNavigation = () => {
+const adminNavigation = () => {
   return (
     <React.Fragment>
-      <nav class="navbar navbar-expand-sm navbar-dark bg-success mb-3">
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3">
         <div class="container">
-          <Link class="navbar-brand" to="/customer">
+          <Link class="navbar-brand" to="/">
             <img class="card-img w-75" src={logo} alt="" />
           </Link>
           <ul class="navbar-nav">
             <li class="nav-item">
-              <Link class="nav-link" to="/customer">
+              <Link class="nav-link" to="/">
                 Home
               </Link>
             </li>
@@ -63,4 +63,4 @@ const customerNavigation = () => {
   );
 };
 
-export default customerNavigation;
+export default adminNavigation;

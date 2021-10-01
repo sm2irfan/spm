@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {
-  Box,
-} from "../css/css";
-//import DatePicker from 'react-date-picker';
-
 
 const CreatePromotion = () => {
     const [newPromotion, setNewPromotion] = useState(
@@ -61,7 +56,6 @@ const CreatePromotion = () => {
      
       return(
         
-        <Box>
           <div className="container">
             
       <h1>Promotional Products Management</h1>
@@ -144,7 +138,6 @@ const CreatePromotion = () => {
         </form>
         </div>
 
-        </Box>
         
       );
 

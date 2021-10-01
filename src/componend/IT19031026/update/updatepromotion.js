@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {
-  Box,
-} from "../css/css";
 
 const initialstate={
   name: '',
@@ -26,9 +23,9 @@ class UpdatePromotion extends Component{
         }
 
         componentDidMount() {
-            axios.get('http://localhost:5000/promotion/getpromotion/'+this.props.match.params.id)
+            axios.get('http://localhost:5000/promotion/getpromotion/6126b4a3b6653a18189d1dc3')
               .then(response => {
-                //console.log(response.data.data.name);
+                //console.log(this.props.match.params.id);
                 this.setState({
                   name: response.data.data.name,
                   detail: response.data.data.detail,
@@ -57,18 +54,28 @@ class UpdatePromotion extends Component{
             
                 console.log(promotion);
             
-                axios.post('http://localhost:5000/promotion/updatepromotion/' + this.props.match.params.id, promotion)
+                axios.post('http://localhost:5000/promotion/updatepromotion/6126b4a3b6653a18189d1dc3', promotion)
                   .then(res => console.log(res.data));
             
-                  window.location = "/list-promotion";
+                  window.location = "/admin/admin-list-promotion";
                 }
-    
+
+                report(e){
+                  const PDF = async () => {
+                      const { data } = await axios.get(
+                        `http://localhost:5000/promotion/pdfpromotion/6126b4a3b6653a18189d1dc3`
+                      );
+                    };
+                    PDF();
+                }
+
     
         render(){
             return(
-              <Box>
                 <div className="container">
                 <h1>Promotional Products Management</h1>
+                <button onClick={e => this.report(e)} class="btn btn-primary btn-lg btn-block" >Report</button>
+
                 <form onSubmit={this.onSubmit}>
                 <div className="mb-3">
           <label htmlFor="subjectName" className="form-label">Name</label>
@@ -138,7 +145,6 @@ class UpdatePromotion extends Component{
                 </form>
               </div>
 
-              </Box>
             );
         };
     
