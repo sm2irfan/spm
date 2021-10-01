@@ -1,100 +1,79 @@
-import React, { Component } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import AdminPaymentItem from "./listcustomeritem";
+import CustomerFooter from "../../customerFooter";
+import CustomerNavigation from "../../customerNavigation";
 
-const initialstate = {
-  products: [],
-};
-class ListPromotion extends Component {
-  constructor(props) {
-    super(props);
-    this.state = initialstate;
-  }
+const AdminPayment = () => {
+  const [promotion, setpromotion] = useState([]);
+  const [SearchPromotion, setSearchPromotion] = useState(false);
+  const [SearchID, setSearchID] = useState("");
 
-  componentDidMount() {
-    axios
-      .get("http://localhost:4000/promotion/getallpromotion")
-      .then((response) => {
-        console.log(response.data.data);
-        this.setState({ products: response.data.data });
-      });
-  }
+  useEffect(() => {
+    const sendRequest = async () => {
+      const { data } = await axios.get(
+        "http://localhost:4000/promotion/getallpromotion"
+      );
+      setpromotion(data.data);
+      console.log(data.data)
+    };
+    sendRequest();
+  }, []);
 
-  navigatedelete(e, promotionId) {
-    axios
-      .delete("http://localhost:4000/promotion/deletepromotion/" + promotionId)
-      .then((response) => {
-        console.log(response.data.data);
-        window.location = "/list-promotion";
-      });
-  }
+  useEffect(() => {
+    const data2 = promotion.filter(function (mov) {
+      if (mov.name.includes(SearchID)) {
+        return mov;
+      } else {
+        return null;
+      }
+    });
 
-  navigateupdate(e, promotionId) {
-    window.location = "/update-promotion/" + promotionId;
-  }
+    if (data2.length !== 0) {
+      setSearchPromotion(data2);
+    }
+  }, [SearchID]);
 
-  render() {
-    return (
-      <div className="container">
-        <br />
-        <h1>
-          <pre class="tab">
-            Promotional Products Management{" "}
-            <a href="create-promotion">
-              <button class="btn btn-success btn-lg float-right" type="submit">
-                New Product
-              </button>
-            </a>
-          </pre>
-        </h1>
+  return (
+    <React.Fragment>
+      <CustomerNavigation/>
+      <center>
+      <h1 class="text-center"> Promotional Details </h1>
+      <br></br>
 
-        <br />
-        <table className="table">
-          <thead className="thead-light">
+      <div className="col-md-11">
+        <div class="input-group mb-3">
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Find By ID..."
+            onChange={(e) => {
+              setSearchID(e.target.value);
+            }}
+          />
+        </div>
+
+        <br></br>
+        <table class="table table-dark">
+          <thead>
             <tr>
-              <th>Photo</th>
-              <th>Name</th>
-              <th>Detail</th>
-              <th>Discount (Rs)</th>
-              <th>From</th>
-              <th>To</th>
-              <th>Actions</th>
+            <th>Photo</th>
+               <th>Name</th>
+               <th>Detail</th>
+               <th>Discount (Rs)</th>
+               <th>From</th>
+               <th>To</th>
             </tr>
-            <br />
           </thead>
-          <tbody>
-            {this.state.products.length > 0 &&
-              this.state.products.map((item, index) => (
-                <tr key={index}>
-                  <td>
-                    <img src={item.photo} height="130" width="130" />
-                  </td>
-                  <td>{item.name}</td>
-                  <td>{item.detail}</td>
-                  <td>{item.discount}</td>
-                  <td>{item.to}</td>
-                  <td>{item.from}</td>
-                  <td>
-                    <button
-                      className="btn btn-primary"
-                      onClick={(e) => this.navigateupdate(e, item._id)}
-                    >
-                      Update
-                    </button>
-                    &nbsp;&nbsp;
-                    <button
-                      className="btn btn-primary"
-                      onClick={(e) => this.navigatedelete(e, item._id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
+          {(SearchPromotion || promotion).map((promotion) => (
+            <AdminPaymentItem promotion={promotion} />
+          ))}
         </table>
       </div>
-    );
-  }
-}
+      </center>
+      <CustomerFooter/>
+    </React.Fragment>
+  );
+};
 
-export default ListPromotion;
+export default AdminPayment;

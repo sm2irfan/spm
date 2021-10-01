@@ -10,6 +10,9 @@ import CutomerPaymentHistory from "./IT19029900/cutomerPaymentHistory";
 import CreateFeedback from "./IT17016476/createFeedback";
 import FeedbacksList from "./IT17016476/viewFeedback";
 
+import ListCustomerpro from './IT19031026/list/listcustomer';
+
+
 const customerRoute = () => {
   return (
     <React.Fragment>
@@ -48,6 +51,11 @@ const customerRoute = () => {
       <Route path="/viewFeedback" exact>
         <FeedbacksList />
       </Route>
+
+      <Route path="/listcustomer" exact>
+        <ListCustomerpro />
+      </Route>
+
     </React.Fragment>
   );
 };

@@ -28,7 +28,7 @@ const CreatePromotion = () => {
       .then((res) => {
         console.log(res.data.data);
         alert("inserted");
-        window.location = "/list-promotion";
+        window.location = "/admin/admin-list-promotion";
       })
       .catch((err) => {
         console.log(err);

@@ -25,7 +25,7 @@ class UpdatePromotion extends Component {
   componentDidMount() {
     axios
       .get(
-        `http://localhost:4000/promotion/getpromotion/6126b4a3b6653a18189d1dc3`
+        `http://localhost:4000/promotion/getpromotion/615716eaf6f8c94840d79fd7`
       )
       .then((response) => {
         //console.log(this.props.match.params.id);
@@ -58,7 +58,7 @@ class UpdatePromotion extends Component {
 
     axios
       .post(
-        "http://localhost:4000/promotion/updatepromotion/6126b4a3b6653a18189d1dc3",
+        "http://localhost:4000/promotion/updatepromotion/615716eaf6f8c94840d79fd7",
         promotion
       )
       .then((res) => console.log(res.data));
@@ -69,7 +69,7 @@ class UpdatePromotion extends Component {
   report(e) {
     const PDF = async () => {
       const { data } = await axios.get(
-        `http://localhost:4000/promotion/pdfpromotion/6126b4a3b6653a18189d1dc3`
+        `http://localhost:4000/promotion/pdfpromotion/615716eaf6f8c94840d79fd7`
       );
     };
     PDF();

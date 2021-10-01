@@ -32,6 +32,13 @@ const customerNavigation = () => {
             </li>
             <li class="nav-item">
               {localStorage.getItem("CustomerIsLoggedIn") && (
+                <Link class="nav-link" to="/listcustomer">
+                  Promotions
+                </Link>
+              )}
+            </li>
+            <li class="nav-item">
+              {localStorage.getItem("CustomerIsLoggedIn") && (
                 <Link class="nav-link" to="/customerProfile">
                   Profile
                 </Link>

@@ -10,7 +10,6 @@ import AdminPayment from "../IT19029900/admin/adminPayment";
 import CreatePro from '../IT19031026/create/createpromotion';
 import ListPro from '../IT19031026/list/listspromotion';
 import UpdatePro from '../IT19031026/update/updatepromotion';
-import ListCustomerpro from '../IT19031026/list/listcustomer';
 import Adminpro from '../IT19031026/admin/admin';
 
 
