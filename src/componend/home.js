@@ -1,5 +1,5 @@
 import React from "react";
-import banner from "../banner.jpg";
+import banner from "../banner.png";
 import CustomerFooter from "./customerFooter";
 import CustomerNavigation from "./customerNavigation";
 import Cart from '../cartComponend/App';
