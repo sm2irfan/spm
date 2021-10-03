@@ -2,6 +2,8 @@ import React from "react";
 import banner from "../banner.jpg";
 import CustomerFooter from "./customerFooter";
 import CustomerNavigation from "./customerNavigation";
+import Cart from '../cartComponend/App';
+import ViewProduct from "./IT19018256/viewProduct";
 
 const home = () => {
   return (
@@ -73,134 +75,8 @@ const home = () => {
           <u>Featured Product</u>
         </h1>
       </div>
-
-      <div class="container">
-        <div class="row mt-3">
-          <div class="col  mt-3 mb-3">
-            <div class="card">
-              <div class="card-body">
-                <h4 class="card-title">Card Title</h4>
-                <h6 class="card-subtitle text-muted">Card subtitle</h6>
-                <p class="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Illo, quas.
-                </p>
-                <a class="btn btn-outline-primary" href="#">
-                  Read More
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col  mt-3 mb-3">
-            <div class="card">
-              <div class="card-body">
-                <h4 class="card-title">Card Title</h4>
-                <h6 class="card-subtitle text-muted">Card subtitle</h6>
-                <p class="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Illo, quas.
-                </p>
-                <a class="btn btn-outline-primary" href="#">
-                  Read More
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col  mt-3 mb-3">
-            <div class="card">
-              <div class="card-body">
-                <h4 class="card-title">Card Title</h4>
-                <h6 class="card-subtitle text-muted">Card subtitle</h6>
-                <p class="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Illo, quas.
-                </p>
-                <a class="btn btn-outline-primary" href="#">
-                  Read More
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col  mt-3 mb-3">
-            <div class="card">
-              <div class="card-body">
-                <h4 class="card-title">Card Title</h4>
-                <h6 class="card-subtitle text-muted">Card subtitle</h6>
-                <p class="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Illo, quas.
-                </p>
-                <a class="btn btn-outline-primary" href="#">
-                  Read More
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col  mt-3 mb-3">
-            <div class="card">
-              <div class="card-body">
-                <h4 class="card-title">Card Title</h4>
-                <h6 class="card-subtitle text-muted">Card subtitle</h6>
-                <p class="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Illo, quas.
-                </p>
-                <a class="btn btn-outline-primary" href="#">
-                  Read More
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card  mt-3 mb-3">
-              <div class="card-body">
-                <h4 class="card-title">Card Title</h4>
-                <h6 class="card-subtitle text-muted">Card subtitle</h6>
-                <p class="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Illo, quas.
-                </p>
-                <a class="btn btn-outline-primary" href="#">
-                  Read More
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card  mt-3 mb-3">
-              <div class="card-body">
-                <h4 class="card-title">Card Title</h4>
-                <h6 class="card-subtitle text-muted">Card subtitle</h6>
-                <p class="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Illo, quas.
-                </p>
-                <a class="btn btn-outline-primary" href="#">
-                  Read More
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card  mt-3 mb-3">
-              <div class="card-body">
-                <h4 class="card-title">Card Title</h4>
-                <h6 class="card-subtitle text-muted">Card subtitle</h6>
-                <p class="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Illo, quas.
-                </p>
-                <a class="btn btn-outline-primary" href="#">
-                  Read More
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <Cart/>
+      <ViewProduct></ViewProduct>
       <CustomerFooter></CustomerFooter>
     </React.Fragment>
   );

@@ -16,6 +16,7 @@ import Adminpro from '../IT19031026/admin/admin';
 import CreateProducts from "../IT19018256/create-product.component";
 import ProductList from '../IT19018256/product-list-component';
 import EditProduct from '../IT19018256/edit.product.component';
+import FeedbacksList from "../IT17016476/adminFeedbackList";
 
 const admin = () => {
   return (
@@ -130,8 +131,8 @@ const admin = () => {
 
                     <div id="collapse4" class="collapse">
                       <div class="card-body">
-                        <a href="#" class="dropdown-item">
-                          Link 1
+                        <a href="/admin/allFeedback" class="dropdown-item">
+                          Manage Feedback
                         </a>
                         <a href="#" class="dropdown-item">
                           Link 2
@@ -232,6 +233,8 @@ const admin = () => {
                 <Route path="/admin/allProduct" exact component={ProductList} />
                 <Route path="/admin/edit/:id" component={EditProduct} />
 
+
+                <Route path="/admin/allFeedback" exact component={FeedbacksList} />
 
               </div>
             </div>

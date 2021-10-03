@@ -24,33 +24,11 @@ const Feedback = props => (
             <div class="card-body">
                 <h6> <p class="card-text"> {props.feedback.email}</p> </h6>
                <h5> <p class="card-text">{props.feedback.message}</p> </h5>
-                <Link to={"/edit/" + props.feedback._id}>Edit</Link> | <a href="#" onClick={() => { props.deleteFeedback(props.feedback._id) }}>Delete</a>
+                <Link to={"/editFeedback/" + props.feedback._id}>Edit</Link> | <a href="#" onClick={() => { props.deleteFeedback(props.feedback._id) }}>Delete</a>
             </div>
         </div>
     </div>
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     // <div class="jumbotron jumbotron-fluid">
     //     <div class="container">
     //         <h1 class="display-4">{props.feedback.name}</h1>

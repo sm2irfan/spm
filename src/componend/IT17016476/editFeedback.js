@@ -10,81 +10,103 @@ export default class EditFeedback extends Component {
   constructor(props) {
     super(props);
 
+    this.onChangeName = this.onChangeName.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangeMessage = this.onChangeMessage.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+
     this.state = {
-        id:'',
-        name:'',
-        email:'',
-        message:''
-      }
-  
-      this.handleInputChange = this.handleInputChange.bind(this);
+      name: '',
+      email: '',
+      message: ''
     }
-  
-    componentWillMount(){
-      this.getMeetupDetails();
-    }
-  
-    getMeetupDetails(){
-      let addId = this.props.match.params.id;
-      axios.get(`http://localhost:5000/feedback/add/${addId}`)
+  }
+
+  // componentWillMount() {
+  //   this.getMeetupDetails();
+  // }
+
+  componentDidMount() {
+    axios.get('http://localhost:5000/feedback/' + this.props.match.params.id)
       .then(response => {
         this.setState({
-          id: response.data.id,
           name: response.data.name,
-         email: response.data.email,
+          email: response.data.email,
           message: response.data.message
-        }, () => {
-          console.log(this.state);
-        });
+
+        })
       })
-      .catch(err => console.log(err));
-      }
-  
-    editMeetup(newMeetup){
-      axios.request({
-        method:'put',
-        url:`http://localhost:5000/feedback/add/${this.state.id}`,
-        data: newadd
-      }).then(response => {
-        this.props.history.push('/');
-      }).catch(err => console.log(err));
-    }
-  onChangename(e) {
+      .catch(function (error) {
+        console.log(error);
+      })
+  }
+
+
+
+  // getMeetupDetails() {
+  //   let addId = this.props.match.params.id;
+  //   axios.get(`http://localhost:5000/feedback/add/${addId}`)
+  //     .then(response => {
+  //       this.setState({
+  //         id: response.data.id,
+  //         name: response.data.name,
+  //         email: response.data.email,
+  //         message: response.data.message
+  //       }, () => {
+  //         console.log(this.state);
+  //       });
+  //     })
+  //     .catch(err => console.log(err));
+  // }
+
+  // editMeetup(newMeetup) {
+  //   axios.request({
+  //     method: 'put',
+  //     url: `http://localhost:5000/feedback/add/${this.state.id}`,
+  //     data: newadd
+  //   }).then(response => {
+  //     this.props.history.push('/');
+  //   }).catch(err => console.log(err));
+  // }
+
+
+
+  onChangeName(e) {
     this.setState({
       name: e.target.value
     })
   }
 
-  onChangeemail(e) {
+  onChangeEmail(e) {
     this.setState({
       email: e.target.value
     })
   }
 
-  onChangemessage(e) {
+  onChangeMessage(e) {
     this.setState({
       message: e.target.value
     })
   }
 
   onSubmit(e) {
-    console.log("This is for feedback checking 1");
     e.preventDefault();
-    console.log("This is for feedback checking 2");
-    const feedbacks = {
+
+    const feedback = {
       name: this.state.name,
       email: this.state.email,
-      message: this.state.message,
+      message: this.state.message
 
     }
 
-    console.log(feedbacks);
-    console.log("This is for feedback checking");
-    axios.post(`http://localhost:5000/feedback/add/${addId}`)
+    console.log(feedback);
+
+    axios.post('http://localhost:5000/feedback/update/' + this.props.match.params.id, feedback)
       .then(res => console.log(res.data));
 
-    // window.location = '/';
+    window.location = '/viewFeedback';
   }
+
 
   render() {
     return (
@@ -104,12 +126,12 @@ export default class EditFeedback extends Component {
             <div class="row">
               <div class="col-md-6 mx-auto">
                 <div class="jumbotron jumbotron-fluid">
-                  
+
                   <div class="card-title">
                     {/* <h4>Feedback Form</h4> */}
                   </div>
                   <div class="card-body">
-                     <form onSubmit={this.onSubmit}>
+                    <form onSubmit={this.onSubmit}>
                       <div class="form-group">
                         <label for="name">Name</label>
                         <input
@@ -117,7 +139,7 @@ export default class EditFeedback extends Component {
                           class="form-control"
                           placeholder="Enter name"
                           value={this.state.name}
-                          onChange={this.onChangename}
+                          onChange={this.onChangeName}
                           required
                         />
                       </div>
@@ -128,21 +150,21 @@ export default class EditFeedback extends Component {
                           class="form-control"
                           placeholder="Enter email"
                           value={this.state.email}
-                          onChange={this.onChangeemail}
+                          onChange={this.onChangeEmail}
                           required
                         />
                       </div>
 
                       <div class="form-group">
                         <label for="exampleFormControlTextarea1">Message</label>
-                        
+
 
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" value={this.state.message}
-                          onChange={this.onChangemessage}/>
+                          onChange={this.onChangeMessage} />
                       </div>
                       <div className="form-group">
-          <input type="submit" value="Submit" className="btn btn-primary" />
-        </div>
+                        <input type="submit" value="Submit" className="btn btn-primary" />
+                      </div>
 
                     </form>
                   </div>

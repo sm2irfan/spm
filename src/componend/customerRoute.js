@@ -9,6 +9,7 @@ import CustomerPayment from "./IT19029900/customerPayment";
 import CutomerPaymentHistory from "./IT19029900/cutomerPaymentHistory";
 import CreateFeedback from "./IT17016476/createFeedback";
 import FeedbacksList from "./IT17016476/viewFeedback";
+import FeedbackEdit from "./IT17016476/editFeedback"
 
 import ListCustomerpro from './IT19031026/list/listcustomer';
 
@@ -51,6 +52,8 @@ const customerRoute = () => {
       <Route path="/viewFeedback" exact>
         <FeedbacksList />
       </Route>
+
+      <Route path="/editFeedback/:id" component={FeedbackEdit}/>
 
       <Route path="/listcustomer" exact>
         <ListCustomerpro />
